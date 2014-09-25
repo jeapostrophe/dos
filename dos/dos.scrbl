@@ -11,6 +11,14 @@ the user can decide what the kernel's internal state is and how user
 processes interact with that state. There are three kernels that make
 concrete common kernel implementation choices.
 
+The big picture of this library is that the @racketmodname[dos/win]
+module makes @racketmodname[2htdp/universe]-style programs more
+compositional by (a) using continuations to hide the internal
+state (including control state) of components and (b) using
+environments as a standard monoid-based inter-component communication
+channel. A monoid is used to ensure that the components can be
+evaluated in any order.
+
 @table-of-contents[]
 
 @section[#:tag "dos"]{DOS: bare-bones kernel}
