@@ -7,19 +7,17 @@
 (define (circle@ x y r)
   (λ (s) (place-image (circle r "solid" "blue") x y s)))
 
-(define (mouse-tracking-ball env)
-  (define r (env-read1 env 'radius 0))
+(define ((mouse-tracking-ball r) env)
   (define nr
     (if (env-key? env " ")
         0
         (+ r 0.1)))
   (define x (env-read1 env 'mouse-x 0))
   (define y (env-read1 env 'mouse-y 0))
-  (mouse-tracking-ball
+  ((mouse-tracking-ball nr)
    (win-write
     #:threads (decaying-ball x y r)
-    'gfx (circle@ x y r)
-    'radius nr)))
+    'gfx (circle@ x y r))))
 
 (define ((decaying-ball x y r) env)
   (for ([i (in-range 1 11)])
@@ -27,7 +25,7 @@
   (win-exit))
 
 (module+ main
-  (big-bang (win-mbr mouse-tracking-ball)
+  (big-bang (win-mbr (mouse-tracking-ball 0))
             (on-tick win-on-tick)
             (to-draw (win-to-draw (empty-scene 800 600)))
             (on-key win-on-key)
@@ -37,5 +35,5 @@
 
 (module+ test
   (require rackunit)
-  (check-equal? (env-read1 (win-test (hasheq 'radius (list 1)) mouse-tracking-ball) 'radius #f)
-                1.1))
+  (check-equal? ((env-read1 (win-test (hasheq) (mouse-tracking-ball 0)) 'gfx #f) (empty-scene 800 600))
+                ((circle@ 0 0 0) (empty-scene 800 600))))
