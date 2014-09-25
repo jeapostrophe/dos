@@ -27,7 +27,7 @@
     (+ (map-reduce f + a (car l))
        (map-reduce f + a (cdr l)))]
    [else
-    (+ a (f l))]))
+    (f l)]))
 
 (define (dos-boot merge-effects last-state ps empty-effects)
   (map-reduce (λ (p) (run-process-until-syscall p last-state))
@@ -40,6 +40,9 @@
         [(null? y) x]
         [else (cons x y)]))
 
+(define (dos-test st p)
+  (run-process-until-syscall p st))
+
 (require racket/contract/base)
 (provide
  (contract-out
@@ -47,6 +50,9 @@
    (-> any/c any/c any/c)]
   [dos-syscall
    (-> (-> continuation? any/c)
+       any/c)]
+  [dos-test
+   (-> any/c (-> any/c any/c)
        any/c)]
   [dos-boot
    (-> (-> any/c any/c any/c)

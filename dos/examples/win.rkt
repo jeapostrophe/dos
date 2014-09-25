@@ -33,4 +33,9 @@
             (on-key win-on-key)
             (on-release win-on-release)
             (on-mouse win-on-mouse)
-            (stop-when (win-stop-when 'mouse-click))))
+            (stop-when (win-stop-when 'mouse-down?))))
+
+(module+ test
+  (require rackunit)
+  (check-equal? (env-read1 (win-test (hasheq 'radius (list 1)) mouse-tracking-ball) 'radius #f)
+                1.1))

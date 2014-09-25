@@ -10,7 +10,7 @@
     (f s)))
 
 (define (win-on-mouse w0 x y me)
-  (define w1 (win-env-replace w0 'mouse-click (list (string=? me "button-down"))))
+  (define w1 (win-env-replace w0 'mouse-down? (list (string=? me "button-down"))))
   (define w2 (win-env-replace w1 'mouse-x (list x)))
   (define w3 (win-env-replace w2 'mouse-y (list y)))
   w3)

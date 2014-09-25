@@ -19,8 +19,13 @@
        (state (* i 2) (list k)))))
   (dos-syscall (λ (k) (state 0 null))))
 
-(for/fold ([st (state 1 t0)])
-          ([i (in-range 20)])
-  (dos-boot merge-effects st
-            (state-ps st)
-            (state 0 null)))
+(module+ main
+  (for/fold ([st (state 1 t0)])
+            ([i (in-range 20)])
+    (dos-boot merge-effects st
+              (state-ps st)
+              (state 0 null))))
+
+(module+ test
+  (require rackunit)
+  (check-equal? 2 (state-i (dos-test (state 1 null) t0))))

@@ -56,6 +56,9 @@
   (match-define (win env ps) w)
   (env-read1 env k d))
 
+(define (win-test env p)
+  (os2-test env p))
+
 (require racket/contract/base)
 (provide
  (contract-out
@@ -72,7 +75,10 @@
   [win-exit
    (->* () ()
         #:rest any/c
-        hash?)]
+        void?)]
+  [win-test
+   (-> hash? (-> any/c any/c)
+       hash?)]
   [env-read1
    (-> hash? symbol? any/c
        any/c)]

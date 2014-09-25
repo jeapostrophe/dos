@@ -19,6 +19,9 @@
                 (dos-boot merge-bst last-st ps (os2 empty-st null)))
   (values next-st next-ps))
 
+(define (os2-test st p)
+  (os2-state (dos-test st p)))
+
 (require racket/contract/base)
 (provide
  (contract-out
@@ -28,6 +31,9 @@
    (->* (any/c)
         (#:threads any/c)
         any/c)]
+  [os2-test
+   (-> any/c (-> any/c any/c)
+       any/c)]
   [os2-boot
    (-> (-> any/c any/c any/c)
        any/c

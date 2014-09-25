@@ -10,6 +10,11 @@
         (os2-write (* i 2))))
   (os2-exit 0))
 
-(for/fold ([st 1] [ps t0])
-          ([i (in-range 20)])
-  (os2-boot + st ps 0))
+(module+ main
+  (for/fold ([st 1] [ps t0])
+            ([i (in-range 20)])
+    (os2-boot + st ps 0)))
+
+(module+ test
+  (require rackunit)
+  (check-equal? 2 (os2-test 1 t0)))
