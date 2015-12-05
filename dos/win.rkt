@@ -5,8 +5,16 @@
 
 (struct win (env ps))
 
-(define (hash-append ht k v)
-  (hash-update ht k (λ (l) (append v l)) empty))
+(define (hash-append ht k new-l)
+  (define old-l
+    (hash-ref ht k #f))
+  (hash-set ht k
+            (if old-l
+                (append new-l old-l)
+                new-l)))
+
+(define (hash-cons ht k v)
+  (hash-update ht k (λ (old-l) (cons v old-l)) empty))
 
 (define empty-env (hasheq))
 (define (merge-env ht1 ht2)
@@ -27,7 +35,7 @@
       [(list)
        h]
       [(list-rest k v kvs)
-       (loop (hash-append h k (list v))
+       (loop (hash-cons h k v)
              kvs)])))
 
 (define (win-write #:threads [ts null] . kvs)
