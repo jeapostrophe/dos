@@ -1,3 +1,3 @@
 #lang info
 (define scribblings
-  '(("dos.scrbl" (multi-page) (tool 100))))
+  '(("dos.scrbl" (multi-page) ("UI"))))
