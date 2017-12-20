@@ -3,7 +3,7 @@
                      racket/contract/base
                      racket/bool))
 
-@title{@bold{DOS}: Delimited-continuation-based Operating-system Simulator}
+@title{DOS: Delimited-continuation-based Operating-system Simulator}
 @author{Jay McCarthy}
 
 This library provides a set of operating-system-like kernels, where
