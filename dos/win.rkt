@@ -45,7 +45,9 @@
   (os2-exit (hasheq/l kvs)))
 
 (define (win-mbr . ts)
-  (win empty-env ts))
+  (win empty-env
+       (for/list ([t (in-list ts)])
+         (λ (env) (os2-exit (t env))))))
 
 (define (win-boot w)
   (match-define (win env ps) w)
