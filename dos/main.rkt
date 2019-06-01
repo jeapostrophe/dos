@@ -43,8 +43,10 @@
 (define (dos-test st p)
   (run-process-until-syscall p st))
 
-(require racket/contract/base)
+#;(require racket/contract/base)
 (provide
+ tcons dos-syscall dos-test dos-boot
+ #;
  (contract-out
   [tcons
    (-> any/c any/c any/c)]

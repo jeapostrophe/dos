@@ -69,9 +69,12 @@
 (define (win-test env p)
   (os2-test env p))
 
-(require racket/contract/base)
+#;(require racket/contract/base)
 (provide
- (contract-out
+ win? win-mbr win-write win-exit win-test
+ env-read1 env-read win-boot
+ win-env-replace win-env-read win-env-read1
+ #;(contract-out
   [win?
    (-> any/c boolean?)]
   [win-mbr

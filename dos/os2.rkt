@@ -22,9 +22,10 @@
 (define (os2-test st p)
   (os2-state (dos-test st p)))
 
-(require racket/contract/base)
+#;(require racket/contract/base)
 (provide
- (contract-out
+ os2-exit os2-write os2-test os2-boot
+ #;(contract-out
   [os2-exit
    (-> any/c any)]
   [os2-write
